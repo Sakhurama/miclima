@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    fetchData("londres");
+    fetchData("dubai");
   }, []);
 
   return (
@@ -42,7 +42,7 @@ export default function Home() {
               <div>
                 <span>
                 <span>Temperatura: </span>
-                  {weatherData?.main?.temp}
+                  {Math.floor(weatherData?.main?.temp - 273.15)}°
                 </span>
               </div>
               <div>
@@ -52,12 +52,11 @@ export default function Home() {
               <div>
                 <span>¿Cómo está el clima? </span>
                 {weatherData?.weather[0]?.description?.toUpperCase()}
-              </div>
-              <div>{weatherData?.name}</div>
-              <div>{date}</div>
+              </div> 
             </div>
           </div>
-          
+          <div className={styles.place}>{weatherData?.name}</div>
+              <div className={styles.date}>{date}</div>
           </>
         ): (
           <div className={styles.place}>Cargando...</div>
