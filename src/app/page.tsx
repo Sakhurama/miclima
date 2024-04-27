@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './page.module.css'
 
 function getCurrentDate () {
-
+  return "la monda manin";
 }
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    fetchData("colombia");
+    fetchData("londres");
   }, []);
 
   return (
@@ -35,25 +35,29 @@ export default function Home() {
           <>
           <div className={styles.icon_and_weatherInfo}>
             <div className={styles.weatherIcon}>
-              <i className="wi wi-alien"></i>
+              <i className="wi wi-day-cloudy"></i>
+            </div>
+
+            <div className={styles.weatherInfo}>
+              <div>
+                <span>
+                <span>Temperatura: </span>
+                  {weatherData?.main?.temp}
+                </span>
+              </div>
+              <div>
+                  <span>Sensación termica: </span>
+                  {weatherData?.main?.feels_like}
+              </div>
+              <div>
+                <span>¿Cómo está el clima? </span>
+                {weatherData?.weather[0]?.description?.toUpperCase()}
+              </div>
+              <div>{weatherData?.name}</div>
+              <div>{date}</div>
             </div>
           </div>
-          <div className={styles.weatherInfo}>
-            <div>
-              <span>
-              <span>Temperatura: </span>
-                {weatherData?.main?.temp}
-              </span>
-            </div>
-            <div>
-                <span>Sensación termica: </span>
-                {weatherData?.main?.feels_like}
-            </div>
-            <div>
-              <span>¿Cómo está el clima? </span>
-              {weatherData?.weather[0]?.description?.toUpperCase()}
-            </div>
-          </div>
+          
           </>
         ): (
           <div className={styles.place}>Cargando...</div>
