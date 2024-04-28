@@ -1,67 +1,96 @@
 "use client";
 import { useEffect, useState } from "react";
-import styles from './page.module.css'
-
-function getCurrentDate () {
-  return "la monda manin";
-}
+import styles from "./page.module.css";
 
 export default function Home() {
-  const date = getCurrentDate ();
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState();
   const [city, setCity] = useState("Colombia");
 
-  async function fetchData(cityName:string) {  
+  const iconMapping = {
+    "01d": "wi-owm-day-800", // día soleado
+    "02d": "wi-owm-day-802", // día nublado con ráfagas
+    "03d": "wi-owm-day-803", // día nublado
+    "04d": "wi-owm-day-804", // nublado
+    "09d": "wi-owm-day-501", // lluvia
+    "10d": "wi-owm-day-502", // lluvia intensa
+    "11d": "wi-owm-day-210", // relámpago
+    "13d": "wi-owm-day-600", // nieve
+    "50d": "wi-owm-day-741", // niebla
+    // Puedes continuar con los demás códigos según sea necesario
+  };
+
+  async function fetchData(cityName) {
     try {
-      const response = await fetch("http://localhost:3000/api/weather?address=" + cityName
+      const response = await fetch(
+        "http://localhost:3000/api/weather?address=" + cityName
       );
       const jsonData = (await response.json()).data;
       setWeatherData(jsonData);
-    } 
-    
-    catch(error) {
+    } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(()=>{
-    fetchData("dubai");
-  }, []);
-
   return (
     <main className={styles.main}>
       <article className={styles.widget}>
-        {weatherData && weatherData.weather && weatherData.weather[0] ?(
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            fetchData(city);
+          }}
+          className={styles.weatherLocation}
+        >
+          <input
+            className={styles.input_field}
+            type="text"
+            placeholder="Consulte aquí su ciudad"
+            id="cityName"
+            name="cityName"
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <button className={styles.search_button} type="submit">
+            Buscar
+          </button>
+        </form>
+        {weatherData && weatherData.weather && weatherData.weather[0] ? (
           <>
-          <div className={styles.icon_and_weatherInfo}>
-            <div className={styles.weatherIcon}>
-              <i className="wi wi-day-cloudy"></i>
-            </div>
-
-            <div className={styles.weatherInfo}>
-              <div>
-                <span>
-                <span>Temperatura: </span>
-                  {Math.floor(weatherData?.main?.temp - 273.15)}°
-                </span>
+            <div className={styles.icon_and_weatherInfo}>
+              <div className={styles.weatherIcon}>
+                <i
+                  className={`wi ${
+                    iconMapping[weatherData.weather[0].icon]
+                  }`}
+                ></i>
               </div>
-              <div>
-                  <span>Sensación termica: </span>
-                  {weatherData?.main?.feels_like}
+              <div className={styles.weatherInfo}>
+                <div className={styles.temperature}>
+                  <span>Temperatura: </span>
+                  {Math.floor(weatherData.main.temp - 273.15)}°
+                </div>
+                <div>
+                  <span>Humedad: </span>
+                  {weatherData.main.humidity}%
+                </div>
+                <div>
+                  <span>Sensación térmica: </span>
+                  {Math.floor(weatherData.main.feels_like - 273.15)}°
+                </div>
+                <br />
+                <div className={styles.weatherCondition}>
+                  <span>¿Cómo está el clima? </span> <br />
+                  {weatherData.weather[0].description.charAt(0).toUpperCase() +
+                    weatherData.weather[0].description.slice(1)}
+                </div>
               </div>
-              <div>
-                <span>¿Cómo está el clima? </span>
-                {weatherData?.weather[0]?.description?.toUpperCase()}
-              </div> 
             </div>
-          </div>
-          <div className={styles.place}>{weatherData?.name}</div>
-              <div className={styles.date}>{date}</div>
+            <div className={styles.place}>{weatherData.name}</div>
           </>
-        ): (
+        ) : (
           <div className={styles.place}>Cargando...</div>
         )}
       </article>
     </main>
   );
 }
+
