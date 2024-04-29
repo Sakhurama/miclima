@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import './api/weather/animation/loading.css'
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState();
@@ -8,15 +9,23 @@ export default function Home() {
 
   const iconMapping = {
     "01d": "wi-owm-day-800", // día soleado
+    "01n": "wi-owm-night-800", // noche clara
     "02d": "wi-owm-day-802", // día nublado con ráfagas
+    "02n": "wi-owm-night-802", // noche nublada con ráfagas
     "03d": "wi-owm-day-803", // día nublado
+    "03n": "wi-owm-night-803", // noche nublada
     "04d": "wi-owm-day-804", // nublado
+    "04n": "wi-owm-night-804", // noche nublada
     "09d": "wi-owm-day-501", // lluvia
+    "09n": "wi-owm-night-501", // lluvia nocturna
     "10d": "wi-owm-day-502", // lluvia intensa
+    "10n": "wi-owm-night-502", // lluvia intensa nocturna
     "11d": "wi-owm-day-210", // relámpago
+    "11n": "wi-owm-night-210", // relámpago nocturno
     "13d": "wi-owm-day-600", // nieve
+    "13n": "wi-owm-night-600", // nieve nocturna
     "50d": "wi-owm-day-741", // niebla
-    // Puedes continuar con los demás códigos según sea necesario
+    "50n": "wi-owm-night-741" // niebla nocturna
   };
 
   async function fetchData(cityName) {
@@ -87,7 +96,8 @@ export default function Home() {
             <div className={styles.place}>{weatherData.name}</div>
           </>
         ) : (
-          <div className={styles.place}>Cargando...</div>
+          <div className={styles.place}>
+<div class="lds-facebook"><div></div><div></div><div></div></div>          </div>
         )}
       </article>
     </main>
