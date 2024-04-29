@@ -97,7 +97,7 @@ export default function Home() {
           </>
         ) : (
           <div className={styles.place}>
-<div class="lds-facebook"><div></div><div></div><div></div></div>          </div>
+            <div class="lds-facebook"><div></div><div></div><div></div></div>          </div>
         )}
       </article>
     </main>
