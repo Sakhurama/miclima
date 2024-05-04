@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import styles from "./page.module.css";
-import './api/weather/animation/loading.css'
+import styles from "./styles/page.module.css";
+import './styles/animation/loading.css'
+import SearchIcon from './components/SearchIcon';
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState();
@@ -43,12 +44,12 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <article className={styles.widget}>
-        <form
+
+        <form className={styles.weatherLocation}
           onSubmit={(e) => {
             e.preventDefault();
             fetchData(city);
           }}
-          className={styles.weatherLocation}
         >
           <input
             className={styles.input_field}
@@ -58,12 +59,14 @@ export default function Home() {
             name="cityName"
             onChange={(e) => setCity(e.target.value)}
           />
-          <button className={styles.search_button} type="submit">
-            Buscar
+          <button className={styles.searchbtn} type="submit">
+          <SearchIcon/>
           </button>
         </form>
+
         {weatherData && weatherData.weather && weatherData.weather[0] ? (
           <>
+
             <div className={styles.icon_and_weatherInfo}>
               <div className={styles.weatherIcon}>
                 <i
@@ -71,30 +74,42 @@ export default function Home() {
                     iconMapping[weatherData.weather[0].icon]
                   }`}
                 ></i>
+                <div className={styles.weatherDescription}>
+                  {weatherData.weather[0].description.charAt(0).toUpperCase() +
+                    weatherData.weather[0].description.slice(1)}
               </div>
+              </div>
+
+{/* Parametros del clima */}
+
               <div className={styles.weatherInfo}>
+
                 <div className={styles.temperature}>
-                  <span>Temperatura: </span>
                   {Math.floor(weatherData.main.temp - 273.15)}°
                 </div>
+
+              <div className={styles.weatherStatus}>
+
                 <div>
                   <span>Humedad: </span>
                   {weatherData.main.humidity}%
                 </div>
+
                 <div>
                   <span>Sensación térmica: </span>
                   {Math.floor(weatherData.main.feels_like - 273.15)}°
                 </div>
-                <br />
-                <div className={styles.weatherCondition}>
-                  <span>¿Cómo está el clima? </span> <br />
-                  {weatherData.weather[0].description.charAt(0).toUpperCase() +
-                    weatherData.weather[0].description.slice(1)}
-                </div>
               </div>
+
+                <br />
+
             </div>
-            <div className={styles.place}>{weatherData.name}</div>
+          </div>
+          <div className={styles.place}>{weatherData.name}</div>
           </>
+
+        // loader icono de carga
+
         ) : (
           <div className={styles.place}>
             <div class="lds-facebook"><div></div><div></div><div></div></div>          </div>
