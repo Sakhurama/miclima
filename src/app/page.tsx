@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import styles from "./styles/page.module.css";
 import './styles/animation/loading.css'
 import SearchIcon from './components/SearchIcon';
+import ContactForm from './components/ContactForm';
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState();
   const [city, setCity] = useState("Colombia");
+  const [showPopup, setShowPopup] = useState(false);
 
   const iconMapping = {
     "01d": "wi-owm-day-800", // día soleado
@@ -105,7 +107,28 @@ export default function Home() {
 
             </div>
           </div>
-          <div className={styles.place}>{weatherData.name}</div>
+        <div className={styles.place}>{weatherData.name}</div>
+        <div className={styles.containerForm}>
+          
+          {/* Botón para abrir el pop-up */}
+        <button className={styles.contactbtn} onClick={() => setShowPopup(true)}>
+          ¿Te gustaría recibir actualizaciones del clima?
+        </button>
+
+        {/* Pop-up con el formulario de contacto */}
+        {showPopup && (
+          <div className={styles.popup}>
+            <div className={styles.popupContent}>
+              <button className={styles.closeBtn} onClick={() => setShowPopup(false)}>
+                Cerrar
+              </button>
+              <ContactForm />
+            </div>
+          </div>
+        )}
+        
+        </div> 
+          
           </>
 
         // loader icono de carga
