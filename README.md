@@ -34,6 +34,8 @@ Para la funcionalidad y estetica de esta app se utilizaron diferentes herramient
 
 - [**Loading.io**](https://loading.io/css) Nos ha proporcionado la animación de carga al inicio de la app, si se desea modificar podrá encontrar esta animación en  `src/app/styles/animation/loading.css`
 
+## Diseño
+El diseño ha sido realizado através de Figma para 2 dispositivos, podrá ver el diseño en Figma [aquí](https://www.figma.com/file/dbnKy1WVecTzvRZ4MeANDp/Mi-Clima-app?type=design&node-id=1%3A2&mode=design&t=NfmpAskeHC2st6xd-1).
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
