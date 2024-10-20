@@ -38,15 +38,22 @@ export default function Home() {
     "50n": "wi-owm-night-741" // niebla nocturna
   };
 
+  const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+
   async function fetchData(cityName: string) {
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/weather?address=" + cityName
-      );
-      const jsonData = (await response.json()).data as WeatherData; // Especificamos el tipo esperado
-      setWeatherData(jsonData);
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&lang=es`;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error('Error fetching the weather data');
+      }
+
+      const jsonData = await response.json();
+      setWeatherData(jsonData); // Actualizamos el estado con los datos del clima
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching weather data:", error);
     }
   }
 
