@@ -5,12 +5,19 @@ import './styles/animation/loading.css'
 import SearchIcon from './components/SearchIcon';
 import ContactForm from './components/ContactForm';
 
+// Definimos una interfaz para los datos del clima
+interface WeatherData {
+  weather: { icon: string; description: string }[];
+  main: { temp: number; humidity: number; feels_like: number };
+  name: string;
+}
+
 export default function Home() {
-  const [weatherData, setWeatherData] = useState();
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null); // Inicializamos con null
   const [city, setCity] = useState("Colombia");
   const [showPopup, setShowPopup] = useState(false);
 
-  const iconMapping = {
+  const iconMapping: { [key: string]: string } = {
     "01d": "wi-owm-day-800", // día soleado
     "01n": "wi-owm-night-800", // noche clara
     "02d": "wi-owm-day-802", // día nublado con ráfagas
@@ -31,12 +38,12 @@ export default function Home() {
     "50n": "wi-owm-night-741" // niebla nocturna
   };
 
-  async function fetchData(cityName) {
+  async function fetchData(cityName: string) {
     try {
       const response = await fetch(
         "http://localhost:3000/api/weather?address=" + cityName
       );
-      const jsonData = (await response.json()).data;
+      const jsonData = (await response.json()).data as WeatherData; // Especificamos el tipo esperado
       setWeatherData(jsonData);
     } catch (error) {
       console.log(error);
@@ -46,7 +53,6 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <article className={styles.widget}>
-
         <form className={styles.weatherLocation}
           onSubmit={(e) => {
             e.preventDefault();
@@ -62,83 +68,69 @@ export default function Home() {
             onChange={(e) => setCity(e.target.value)}
           />
           <button className={styles.searchbtn} type="submit">
-          <SearchIcon/>
+            <SearchIcon />
           </button>
         </form>
 
         {weatherData && weatherData.weather && weatherData.weather[0] ? (
           <>
-
             <div className={styles.icon_and_weatherInfo}>
               <div className={styles.weatherIcon}>
                 <i
-                  className={`wi ${
-                    iconMapping[weatherData.weather[0].icon]
-                  }`}
+                  className={`wi ${iconMapping[weatherData.weather[0].icon]}`}
                 ></i>
                 <div className={styles.weatherDescription}>
                   {weatherData.weather[0].description.charAt(0).toUpperCase() +
                     weatherData.weather[0].description.slice(1)}
-              </div>
+                </div>
               </div>
 
-{/* Parametros del clima */}
-
+              {/* Parámetros del clima */}
               <div className={styles.weatherInfo}>
-
                 <div className={styles.temperature}>
                   {Math.floor(weatherData.main.temp - 273.15)}°
                 </div>
 
-              <div className={styles.weatherStatus}>
-
-                <div>
-                  <span>Humedad: </span>
-                  {weatherData.main.humidity}%
+                <div className={styles.weatherStatus}>
+                  <div>
+                    <span>Humedad: </span>
+                    {weatherData.main.humidity}%
+                  </div>
+                  <div>
+                    <span>Sensación térmica: </span>
+                    {Math.floor(weatherData.main.feels_like - 273.15)}°
+                  </div>
                 </div>
-
-                <div>
-                  <span>Sensación térmica: </span>
-                  {Math.floor(weatherData.main.feels_like - 273.15)}°
-                </div>
-              </div>
-
                 <br />
-
+              </div>
             </div>
-          </div>
-        <div className={styles.place}>{weatherData.name}</div>
-        <div className={styles.containerForm}>
-          
-          {/* Botón para abrir el pop-up */}
-        <button className={styles.contactbtn} onClick={() => setShowPopup(true)}>
-          ¿Te gustaría recibir actualizaciones del clima?
-        </button>
-
-        {/* Pop-up con el formulario de contacto */}
-        {showPopup && (
-          <div className={styles.popup}>
-            <div className={styles.popupContent}>
-              <button className={styles.closeBtn} onClick={() => setShowPopup(false)}>
-                Cerrar
+            <div className={styles.place}>{weatherData.name}</div>
+            <div className={styles.containerForm}>
+              {/* Botón para abrir el pop-up */}
+              <button className={styles.contactbtn} onClick={() => setShowPopup(true)}>
+                ¿Te gustaría recibir actualizaciones del clima?
               </button>
-              <ContactForm />
+
+              {/* Pop-up con el formulario de contacto */}
+              {showPopup && (
+                <div className={styles.popup}>
+                  <div className={styles.popupContent}>
+                    <button className={styles.closeBtn} onClick={() => setShowPopup(false)}>
+                      Cerrar
+                    </button>
+                    <ContactForm />
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
-        
-        </div> 
-          
           </>
-
-        // loader icono de carga
-
         ) : (
+          // Loader icono de carga
           <div className={styles.place}>
-            <div class="lds-facebook"><div></div><div></div><div></div></div>          </div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
+          </div>
         )}
       </article>
     </main>
   );
 }
-
