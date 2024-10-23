@@ -1,4 +1,4 @@
-## MiClima App
+# MiClima App
 [![banner principal](public/screenshots/banner.png)](https://mi-climapp.netlify.app)
 <br>
 
@@ -10,7 +10,9 @@ Cuando entregué la prueba aún le faltaban cosas que en su momento no sabía ha
 por eso me permití hacerle un par de mejoras para corregir los pendientes que dejé.
 
 ## Un vistazo
+### Desktop:
 ![desktop](public/screenshots/desktop.png)
+### Mobile:
 ![mobile](public/screenshots/mobile.png)
 <br>
 
