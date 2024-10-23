@@ -1,52 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## MiClima App
+[![banner principal](public/screenshots/banner.png)](https://mi-climapp.netlify.app)
+<br>
 
-## Cómo iniciar
-Haga un clone de este repositorio usando:
-`git clone https://github.com/Sakhurama/miclima`
+Este proyecto fue una prueba tecnica para trabajar como Developer Frontend Junior en Skolmi *(Spoiler: Me dieron el puesto - Mayo 2024)*
+consistía en hacer una app web que consumiera los datos de una API (WeatherMap) para ver el clima usando Next Js, además evaluarían el deploy, las buenas prácticas, el responsive, el diseño, la funcionalidad...
 
-Abra el proyecto en su editor de texto y en la terminal inicie el servidor de desarrollo usando:
+<br>
+Cuando entregué la prueba aún le faltaban cosas que en su momento no sabía hacer bien, hoy echo un vistazo hacia atrás y veo como lo que me costó tanto hace unos meses ahora es un proceso sencillo y bien aprendido,
+por eso me permití hacerle un par de mejoras para corregir los pendientes que dejé.
 
-```bash
-npm run dev
-# o
-yarn dev
-# o
-pnpm dev
-# o
-bun dev
-```
-
-Ingrese en su navegador a [http://localhost:3000](http://localhost:3000) para ver los resultados de la página.
-
-## Cosa que debe saber para editarlo
-☀️ Este proyecto consume información del clima de la API [OpenWeatherMap](https://openweathermap.org/api). Y usa una KEY de default, si desea cambiar la KEY debe ir a su proyecto en: `src/app/api/weather/route.ts`
-
-💻 Para cambiar la estructura de la página o agregar nuevas funcionalidades debe hacerlo desde el archivo `src/app/page.tsx`
-
-🎨 Si desea cambiar los estilos de este proyecto podrá hacerlo modificando el archivo `page.modules.css` que encontrará en la ruta: `src/app/styles/page.modules.css` la media query para estilizar la versión mobile podrá encontrarla en el mismo archivo apartir de la línea 181.
-
-## Recursos utilizados
-Para la funcionalidad y estetica de esta app se utilizaron diferentes herramientas de terceros que a continuación agradezco y explico su funcionalidad:
-
-- [**OpenWeatherMap**](https://openweathermap.org/api) La Api del clima, ella nos provee la información del clima en todas las ciudades, ofrece muchos más datos. Para esta app se utilizó Temperatura (temp) - Humedad (humidity) - Sensación térmica (feels_like) - Nombre de la Ciudad (name) además se le cambió el lenguaje a Español.
-
-- [**Weather Icons**](https://erikflowers.github.io/weather-icons/) Los iconos que usa la app han sido tomados del trabajo de Erik Flowers. Un diseño más minimalista y amigable que el proporcionado por la API.
-
-- [**Loading.io**](https://loading.io/css) Nos ha proporcionado la animación de carga al inicio de la app, si se desea modificar podrá encontrar esta animación en  `src/app/styles/animation/loading.css`
+## Un vistazo
+![desktop](public/screenshots/desktop.png)
+![mobile](public/screenshots/mobile.png)
+<br>
 
 ## Diseño
-El diseño ha sido realizado através de Figma para 2 dispositivos, podrá ver el diseño en Figma [aquí](https://www.figma.com/file/dbnKy1WVecTzvRZ4MeANDp/Mi-Clima-app?type=design&node-id=1%3A2&mode=design&t=NfmpAskeHC2st6xd-1).
-## Learn More
+Yo mismo he realizado el diseño con mis conocimientos en Figma y en UI/UX buscaba un diseño minimalista y sobrio que reflejara la sencillez de esta app sin parecer "Pobre" 
+> [!TIP]
+> Mira el figma que diseñé [Haciendo clic aquí.](https://www.figma.com/file/dbnKy1WVecTzvRZ4MeANDp/Mi-Clima-app?type=design&node-id=1%3A2&mode=design&t=NfmpAskeHC2st6xd-1).
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ¿Qué aprendí y que me falta?
+Aprendí los principios de React y a consumir una API, usar Next Js y trabajar Next Js con CSS y no con Tailwind (aunque Tailwind me gusta más).
+Las siguientes features que tengo en mente son:
+- Enviar correos electrónicos con el informe del clima.
+- Mejorar detallitos de la UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<br>
 
-## Deploy on Vercel
+## Créditos:
+Para la funcionalidad y estetica de esta app se utilizaron diferentes herramientas:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [**OpenWeatherMap**](https://openweathermap.org/api) La Api del clima.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [**Weather Icons**](https://erikflowers.github.io/weather-icons/) Los iconos que usa la app han sido tomados del trabajo de Erik Flowers. Un diseño más minimalista y amigable que el proporcionado por la API.
