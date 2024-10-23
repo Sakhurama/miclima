@@ -3,35 +3,29 @@
 
 .main {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6rem;
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(120deg, #10054D, #2a054d);
-  }
-  
-  .widget {
-    position: absolute;
-    padding: 0 25px;
-    top: 50%;
-    left: 50%;
-    height: 550px;
-    width: 500px;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(120deg, #471069, #30C4D1);
-    border-radius: 20px;
-    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
-  }
-  
-  .weatherLocation{
-    display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    padding: 25px;
+    background: linear-gradient(120deg, #10054D, #2a054d);
+    height: 100vh;
   }
+  
+.widget {
+  width: 90%; /* Cambiar a un porcentaje en lugar de un valor fijo */
+  max-width: 500px; /* Mantener un tamaño máximo para evitar que sea demasiado grande */
+  height: auto; /* Permitir que el contenedor crezca dinámicamente */
+  padding: 20px;
+  background: linear-gradient(120deg, #471069, #30C4D1);
+  border-radius: 20px;
+  box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+}
+  
+.weatherLocation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Para que se distribuyan mejor */
+  width: 100%; /* Asegurarse de que ocupe todo el ancho disponible */
+  padding: 15px 0; /* Reducir el padding en pantallas pequeñas */
+}
 
   .weatherLocation input:focus{
     outline: 0 none;
@@ -80,7 +74,7 @@
     color: white;
   }
 
-   .widget .weatherIcon i {
+  .widget .weatherIcon i {
     padding-top: 5px;
   }
 
@@ -115,6 +109,20 @@
     display: flex;
     justify-content: center;
     margin-top: 25px;
+  }
+
+  .bienvenida {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 600;
+    color: white;
+    line-height: 0.2;
+  }
+
+  .bienvenida span {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
   }
 
   .contactbtn{
@@ -181,23 +189,15 @@
   /* Mobile */
 @media screen and (max-width: 590px) {
   .main {
-    padding: 6rem 6rem 0 6rem ;
+    align-items: center;
   }
   .widget {
-    padding: 0;
-    top: 35%;
-    left: 50%;
-    width: 390px;
     background: none;
     box-shadow: none;
   }
-  
-  .weatherLocation{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: 20px;
-    padding: 10px 20px;
+
+  .input_field{
+    font-size: 22px;
   }
 
   .icon_and_weatherInfo {
